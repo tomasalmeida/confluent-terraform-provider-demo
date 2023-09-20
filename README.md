@@ -1,4 +1,4 @@
-# Demo
+# Demo: different pipelines with different permissions to create permanent resources (cluster/env's/accounts) and volatile ones (topics/role bindings/etc)
 
 ## 0 - create the credentials and login
 
