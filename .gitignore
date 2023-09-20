@@ -1,0 +1,10 @@
+.DS_Store
+*.tfstate
+*.tfstate.*
+.terraform
+.terraform.lock.hcl
+terraform.tfvars
+.workshop_commands
+.idea
+outputs
+imported_confluent_infrastructure
