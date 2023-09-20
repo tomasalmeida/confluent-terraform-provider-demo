@@ -22,7 +22,9 @@
     | Role      | OrganizationAdmin |
     +-----------+-------------------+
 
-## 1 - Create env + SR
+## 1 - Create env + Schema Registry
+
+To create the environment and Schema registry, OrgAdmin permission is needed, so the key above is used here.
 
     export TF_VAR_confluent_cloud_api_key="ENVDEPLOYERAPIKEY"
     export TF_VAR_confluent_cloud_api_secret="ENVDEPLOYERAPISECRET"
@@ -33,6 +35,8 @@
     terraform apply
 
 ## 2 - Create cluster + SA cluster deployer + SA apps
+
+To create the cluster and service accounts, OrgAdmin permission is needed, so the key above is used here.
 
     export TF_VAR_confluent_cloud_api_key="ENVDEPLOYERAPIKEY"
     export TF_VAR_confluent_cloud_api_secret="ENVDEPLOYERAPISECRET"
@@ -47,6 +51,8 @@
 
 ## 3 - Create topics and RBAC
     
+In the previous step we created a new service account to control this cluster, so we will use the permissions here (use the min permission needed)
+
     cat 2-cluster-sa/outputs/service-account-cluster-stage-deployer.txt
 
     export TF_VAR_confluent_kafka_api_key="CLUSTERDEPLOYERKAFKAAPIKEY"
@@ -64,7 +70,7 @@
 
 ## 4 - Add more RBAC
 
-uncomment rbac
+Uncommenting rbac lines to create new resources (comparing the resources with the tfstate)
 
     terraform validate
     terraform plan
@@ -72,13 +78,15 @@ uncomment rbac
 
 ## 5 - Remove permissions
 
-comment rbac
+Comment rbac to force resource destructions (comparing the resources with the tfstate)
 
     terraform validate
     terraform plan
     terraform apply -auto-approve
 
 ## 5 - Destroy resources
+
+Time to clean up!
     
     cd 3-topics-service-accounts
     terraform destroy
@@ -95,11 +103,11 @@ comment rbac
     terraform destroy
 
 ## 6 - Import DEV
-
+    
     export TF_LOG_PATH="./logs/full_log.txt"
     export TF_LOG=trace
-    export TF_VAR_confluent_cloud_api_key...
-    export TF_VAR_confluent_cloud_api_secret...
+    export TF_VAR_confluent_cloud_api_key="ENVDEPLOYERAPIKEY"
+    export TF_VAR_confluent_cloud_api_secret="ENVDEPLOYERAPISECRET"
 
     terraform init
     terraform validate

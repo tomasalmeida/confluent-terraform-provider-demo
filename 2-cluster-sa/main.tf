@@ -13,8 +13,8 @@ provider "confluent" {
 }
 
 data "confluent_environment" "env-stage" {
-#  id = "env-abc123"
-  display_name = "stage"
+  id = "env-abc123"
+  # display_name = "stage"
 }
 
 # Update the config to use a cloud provider and region of your choice.

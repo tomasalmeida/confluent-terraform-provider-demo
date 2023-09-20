@@ -41,7 +41,7 @@ resource "confluent_schema_registry_cluster" "sr-essentials" {
   }
 
   lifecycle {
-#    prevent_destroy = false   
+#    prevent_destroy = true
     prevent_destroy = false
   }
 }
